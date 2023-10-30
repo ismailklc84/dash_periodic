@@ -9,11 +9,12 @@ import redis
 import time
 import os
 import pandas as pd
+from dash import Dash, html
 
 import tasks
 
-app = dash.Dash("app")
-server = app.server
+app = Dash()
+application = app.server
 
 
 # initialize the data when the app starts
@@ -24,9 +25,11 @@ if "DYNO" in os.environ:
     if bool(os.getenv("DASH_PATH_ROUTING", 0)):
         app.config.requests_pathname_prefix = "/{}/".format(os.environ["DASH_APP_NAME"])
 
-redis_instance = redis.StrictRedis.from_url(
-    os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')
-    )
+# redis_instance = redis.StrictRedis.from_url(
+# os.environ.get('REDIS_URL', 'redis://redis:6379')
+#    )
+
+redis_instance = redis.StrictRedis(host='redis', port=6379, password='redis-password')
 
 def serve_layout():
     return html.Div(
@@ -81,5 +84,5 @@ def update_status(value, _):
     return "Data last updated at {}".format(data_last_updated)
 
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+if __name__ == '__main__':
+    app.run_server(port=8080)
