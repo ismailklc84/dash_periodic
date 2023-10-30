@@ -12,8 +12,8 @@ import pandas as pd
 
 import tasks
 
-app = dash.Dash("app")
-server = app.server
+app = Dash()
+application = app.server
 
 
 # initialize the data when the app starts
