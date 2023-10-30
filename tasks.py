@@ -13,9 +13,11 @@ import os
 import redis
 
 
-redis_instance = redis.StrictRedis.from_url(
-    os.environ.get('REDIS_URL', 'redis://redis:6379')
-    )
+# redis_instance = redis.StrictRedis.from_url(
+#    os.environ.get('REDIS_URL', 'redis://redis:6379')
+#    )
+
+redis_instance = redis.StrictRedis(host='redis', port=6379, password='redis-password')
 
 
 celery_app = Celery("Celery App", broker=os.environ.get('REDIS_URL', 'redis://redis:6379'))
