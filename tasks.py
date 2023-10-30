@@ -14,10 +14,11 @@ import redis
 
 
 redis_instance = redis.StrictRedis.from_url(
-    os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')
+    os.environ.get('REDIS_URL', 'redis://redis:6379')
     )
 
-celery_app = Celery("Celery App", broker=os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379'))
+
+celery_app = Celery("Celery App", broker=os.environ.get('REDIS_URL', 'redis://redis:6379'))
 
 REDIS_HASH_NAME = os.environ.get("DASH_APP_NAME", "app-data")
 REDIS_KEYS = {"DATASET": "DATASET", "DATE_UPDATED": "DATE_UPDATED"}
