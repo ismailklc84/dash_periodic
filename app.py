@@ -24,9 +24,11 @@ if "DYNO" in os.environ:
     if bool(os.getenv("DASH_PATH_ROUTING", 0)):
         app.config.requests_pathname_prefix = "/{}/".format(os.environ["DASH_APP_NAME"])
 
-redis_instance = redis.StrictRedis.from_url(
-    os.environ.get('REDIS_URL', 'redis://redis:6379')
-    )
+# redis_instance = redis.StrictRedis.from_url(
+# os.environ.get('REDIS_URL', 'redis://redis:6379')
+#    )
+
+redis_instance = redis.StrictRedis(host='redis', port=6379, password='redis-password')
 
 def serve_layout():
     return html.Div(
