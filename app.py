@@ -83,5 +83,5 @@ def update_status(value, _):
     return "Data last updated at {}".format(data_last_updated)
 
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+if __name__ == '__main__':
+    app.run_server(port=8080)
